@@ -3,7 +3,6 @@
 extern struct window_manager g_window_manager;
 extern bool g_mission_control_active;
 extern int g_connection;
-extern struct mouse_state g_mouse_state;
 
 static TABLE_HASH_FUNC(hash_view)
 {
@@ -640,7 +639,6 @@ enum space_op_error space_manager_focus_space(uint64_t sid)
 
     if (scripting_addition_focus_space(sid)) {
         if (focus_display) display_manager_focus_display(new_did);
-        if (g_mouse_state.window) window_manager_focus_window_with_raise(&g_mouse_state.window->application->psn, g_mouse_state.window->id, g_mouse_state.window->ref);
     }
 
     return SPACE_OP_ERROR_SUCCESS;

@@ -550,7 +550,7 @@ static EVENT_CALLBACK(EVENT_HANDLER_SPACE_CHANGED)
     if (space_is_user(g_space_manager.current_space_id)) {
         if (view_is_invalid(view)) view_update(view);
         if (view_is_dirty(view))   view_flush(view);
-
+		if (g_mouse_state.window) window_manager_focus_window_with_raise(&g_mouse_state.window->application->psn, g_mouse_state.window->id, g_mouse_state.window->ref);
         window_manager_validate_and_check_for_windows_on_space(&g_space_manager, &g_window_manager, g_space_manager.current_space_id);
     }
 
