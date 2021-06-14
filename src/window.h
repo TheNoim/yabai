@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+extern struct mouse_state g_mouse_state;
+
 const CFStringRef kAXFullscreenAttribute = CFSTR("AXFullScreen");
 
 #define AX_WINDOW_MINIMIZED_INDEX      0

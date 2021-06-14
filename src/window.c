@@ -143,6 +143,14 @@ void window_serialize(FILE *rsp, struct window *window)
     bool zoom_fullscreen = node && node->zoom && node->zoom == view->root;
     int stack_index = node && node->window_count > 1 ? window_node_index_of_window(node, window->id)+1 : 0;
 
+    bool grabbed = false;
+
+    if (g_mouse_state.window) {
+        if (g_mouse_state.window->id == window->id) {
+            grabbed = true;
+        }
+    }
+
     fprintf(rsp,
             "{\n"
             "\t\"id\":%d,\n"
@@ -170,6 +178,7 @@ void window_serialize(FILE *rsp, struct window *window)
             "\t\"stack-index\":%d,\n"
             "\t\"zoom-parent\":%d,\n"
             "\t\"zoom-fullscreen\":%d,\n"
+            "\t\"grabbed\":%d,\n"
             "\t\"native-fullscreen\":%d\n"
             "}",
             window->id,
@@ -198,6 +207,7 @@ void window_serialize(FILE *rsp, struct window *window)
             stack_index,
             zoom_parent,
             zoom_fullscreen,
+            grabbed,
             window_is_fullscreen(window));
 }
 
